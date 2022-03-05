@@ -1,0 +1,41 @@
+# Project exclude paths
+/.gradle/
+/Simple Tic-Tac-Toe/task/build/
+/Simple Tic-Tac-Toe/task/out/
+/Simple Tic-Tac-Toe/task/out/production/classes/
+/Topics/For loop and lists/Count occurrences/out/
+/Topics/For loop and lists/Count occurrences/out/production/classes/
+/Topics/For loop and lists/Right Rotation/out/
+/Topics/For loop and lists/Right Rotation/out/production/classes/
+/Topics/For loop and lists/Two numbers in a row/out/
+/Topics/For loop and lists/Two numbers in a row/out/production/classes/
+/Topics/Getting substrings/Case insensitive/out/
+/Topics/Getting substrings/Case insensitive/out/production/classes/
+/Topics/Getting substrings/Exchange/out/
+/Topics/Getting substrings/Exchange/out/production/classes/
+/Topics/Introduction to MutableList/Initializing a list/out/
+/Topics/Introduction to MutableList/Initializing a list/out/production/classes/
+/Topics/Introduction to MutableList/Initializing a mutable list of longs/out/
+/Topics/Introduction to MutableList/Initializing a mutable list of longs/out/production/classes/
+/Topics/Introduction to MutableList/Swap/out/
+/Topics/Introduction to MutableList/Swap/out/production/classes/
+/Topics/Multi-dimensional list/Accordance/out/
+/Topics/Multi-dimensional list/Accordance/out/production/classes/
+/Topics/Multi-dimensional list/Cube of zeros/out/
+/Topics/Multi-dimensional list/Cube of zeros/out/production/classes/
+/Topics/Multi-dimensional list/Kotlin lists/out/
+/Topics/Multi-dimensional list/Kotlin lists/out/production/classes/
+/Topics/Multi-dimensional list/Shapeshifter/out/
+/Topics/Multi-dimensional list/Shapeshifter/out/production/classes/
+/Topics/Processing strings/Double characters/out/
+/Topics/Processing strings/Double characters/out/production/classes/
+/Topics/Processing strings/Generating passwords/out/
+/Topics/Processing strings/Generating passwords/out/production/classes/
+/Topics/Processing strings/Lucky number/out/
+/Topics/Processing strings/Lucky number/out/production/classes/
+/Topics/Processing strings/Number of occurrences/out/
+/Topics/Processing strings/Number of occurrences/out/production/classes/
+/Topics/Work with MutableLists/Adding lists/out/
+/Topics/Work with MutableLists/Adding lists/out/production/classes/
+/Topics/Work with MutableLists/Guard On The Gate/out/
+/Topics/Work with MutableLists/Guard On The Gate/out/production/classes/
