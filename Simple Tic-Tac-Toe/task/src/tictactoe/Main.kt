@@ -1,99 +1,109 @@
 package tictactoe
 
+var playerCounter = 1
 fun main() {
-    print("Enter cells:")
-    val line = readln().take(9)
-    val cells = line.toList().windowed(3,3)
-    println(line.replaceFirst('o', 'O'))
-        //val gamFld = mutableListOf(
-//        mutableListOf(line[0], line[1], line[2]),
-//        mutableListOf(line[3], line[4], line[5]),
-//        mutableListOf(line[6], line[7], line[8])
-//    )
-//    printingField(line)
-//    println(result(gamFld))
-//}
-//
-//fun printingLine(
-//    firstElement: Char,
-//    secondElement: Char,
-//    thirdElement: Char
-//) {
-//    println(
-//        "|" + " " + firstElement + " " + secondElement +
-//                " " + thirdElement + " " + "|"
-//    )
+    val gamFld = MutableList(3) { MutableList(3, { ' ' }) }
+    printingField(gamFld)
+    while (result(gamFld).length > 6) {
+        moveCheck(gamFld)
+        printingField(gamFld)
+    }
+    println(result(gamFld))
 }
 
-//fun printingField(list: String) {
-//    var cou = 0
-//    println("---------")
-//    for (a in 1..3) {
-//        printingLine(list[cou], list[cou + 1], list[cou + 2])
-//        cou += 3
-//    }
-//    println("---------")
-//}
-//
-//fun checkWin(fld: MutableList<MutableList<Char>>, side: Char): Boolean {
-//    return fld[0][0] == side && fld[0][1] == side && fld[0][2] == side ||
-//            fld[1][0] == side && fld[1][1] == side && fld[1][2] == side ||
-//            fld[2][0] == side && fld[2][1] == side && fld[2][2] == side ||
-//            fld[0][0] == side && fld[1][1] == side && fld[2][2] == side ||
-//            fld[0][2] == side && fld[1][1] == side && fld[2][0] == side ||
-//            fld[0][0] == side && fld[1][0] == side && fld[2][0] == side ||
-//            fld[0][2] == side && fld[1][2] == side && fld[2][2] == side ||
-//            fld[0][1] == side && fld[1][1] == side && fld[2][1] == side
-//
-//}
-//
-//fun emptyCellCount(fld: MutableList<MutableList<Char>>): Boolean {
-//    var counter = 0
-//    for (item in fld) {
-//        for (element in item) {
-//            when (element) {
-//                '_' -> counter++
-//            }
-//        }
-//    }
-// return counter == 0
-//}
-//
-//fun itemCounterChk(fld: MutableList<MutableList<Char>>): Boolean {
-//
-//    var xCounter = 0
-//    var oCounter = 0
-//    for (item in fld) {
-//        for (element in item) {
-//            when (element) {
-//                'X' -> xCounter++
-//                'O' -> oCounter++
-//            }
-//        }
-//    }
-//    return abs(xCounter - oCounter) <= 1
-//}
-//
-//fun result(fld: MutableList<MutableList<Char>>): String =
-//            if (checkWin(fld, 'X') && !checkWin(fld, 'O')) {
-//            "X wins"
-//        } else {
-//            if (checkWin(fld, 'O') && !checkWin(fld, 'X')) {
-//                "O wins"
-//            } else {
-//                if (!itemCounterChk(fld) ||
-//                    checkWin(fld, 'X') && checkWin(fld, 'O')
-//                ) {
-//                     "Impossible"
-//                } else {
-//                    if (!checkWin(fld, 'O') && !checkWin(fld, 'X') &&
-//                        itemCounterChk(fld) && !emptyCellCount(fld)
-//                    ) {
-//                         "Game not finished"
-//                    } else {
-//                         "Draw"
-//                    }
-//                }
-//            }
-//        }
-//
+/*
+player's move input primary processing function
+ */
+fun moveCheck(gamFld: MutableList<MutableList<Char>>) {
+    var k = 0
+    while (k == 0) {
+        val input = playerInput()
+        k = if (!checkInput(input, gamFld)) {
+            0
+        } else {
+            1
+        }
+    }
+}
+
+/*
+Checking the player's move for availability
+ */
+fun checkInput(input: List<String>, gamFld: MutableList<MutableList<Char>>): Boolean {
+    var k = 0
+    if (input.lastIndex < 1) {
+        return k == 1
+    }
+    if (input[0].matches("\\d+?".toRegex()) && input[1].matches("\\d+?".toRegex())) {
+        val y = input[0].toInt() - 1
+        val x = input[1].toInt() - 1
+        if (input[0].toInt() <= 3 && input[1].toInt() <= 3) {
+            if (gamFld[y][x] == ' ') {
+                if (playerCounter % 2 > 0) {
+                    gamFld[y][x] = 'X'
+                } else {
+                    gamFld[y][x] = 'O'
+                }
+                k = 1
+                playerCounter++
+            } else {
+                println("This cell is occupied! Choose another one!")
+            }
+        } else {
+            println("Coordinates should be from 1 to 3!")
+        }
+    } else {
+        println("You should enter numbers!")
+    }
+    return k == 1
+}
+
+/* Player's input dialog */
+fun playerInput(): List<String> {
+    print("Enter the coordinates:")
+    val input = readln().split(" ")
+    return input
+}
+
+/*
+Prints game field
+ */
+fun printingField(gamFld: MutableList<MutableList<Char>>) {
+    println("---------")
+    for (i in gamFld) {
+        print("| ${i.joinToString(" ")} |")
+        println()
+    }
+    println("---------")
+}
+
+/*
+Checks if smb win
+ */
+fun checkWin(fld: MutableList<MutableList<Char>>, side: Char): Boolean {
+    return if (playerCounter < 5) false
+    else fld[0][0] == side && fld[0][1] == side && fld[0][2] == side
+            || fld[1][0] == side && fld[1][1] == side && fld[1][2] == side
+            || fld[2][0] == side && fld[2][1] == side && fld[2][2] == side
+            || fld[0][0] == side && fld[1][1] == side && fld[2][2] == side
+            || fld[0][2] == side && fld[1][1] == side && fld[2][0] == side
+            || fld[0][0] == side && fld[1][0] == side && fld[2][0] == side
+            || fld[0][2] == side && fld[1][2] == side && fld[2][2] == side
+            || fld[0][1] == side && fld[1][1] == side && fld[2][1] == side
+}
+
+/*
+Prints game state
+ */
+fun result(fld: MutableList<MutableList<Char>>): String =
+    if (checkWin(fld, 'X') && !checkWin(fld, 'O')) {
+        "X wins"
+    } else {
+        if (checkWin(fld, 'O') && !checkWin(fld, 'X')) {
+            "O wins"
+        } else {
+            if (playerCounter > 9) {
+                "Draw"
+            } else "Nothing"
+        }
+    }

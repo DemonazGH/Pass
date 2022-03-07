@@ -32,7 +32,7 @@ fun main() {
 
 }
 /*
-This function check if the current symbol does not match previous
+This function check if the current symbol does not match with previous
 symbol in the string
  */
 fun checkPresence(result: String, symbolsLine: MutableList<String>): String {
@@ -75,4 +75,3 @@ fun checkAvail(input: MutableList<Int>, result: String, k: IntRange): Int {
     }
     return count
 }
-
